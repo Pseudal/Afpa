@@ -1,0 +1,6 @@
+2Q7 :
+- strong
+- p
+- em
+- meta
+- title
