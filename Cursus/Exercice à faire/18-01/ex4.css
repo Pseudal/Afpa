@@ -10,11 +10,12 @@ br+p{
 h1{
     display: inline-block;
     margin-left: 39%;
+    margin-bottom: 100px;
 }
 h1+p{
     border: solid;
     display: inline-block;
-    margin-left: 38%;
+    margin-left: 37%;
     inline-size: 100px;
 }
 #h2{
