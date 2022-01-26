@@ -45,7 +45,6 @@ h1{
 .s1{
     height: 340px;
     display: flex;
-    justify-content: center;
     justify-content: space-evenly;
 
 }
