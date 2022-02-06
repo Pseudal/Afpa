@@ -1,0 +1,98 @@
+ex1
+a=4
+b=9
+ex2
+
+c=-4
+a=7
+b=3
+ex3
+
+a=34
+b=27
+
+ex4
+c=10.3
+b=10.3
+a=10.3
+
+ex5
+a=-2
+b=-2
+
+ex6
+#include <unistd.h>
+
+void	ft_swap(int *a, int *b)
+{
+	int c
+	int d
+
+	c = *a
+	d = *b
+	*a = d
+	*b = c
+}
+c'est du C, juste pour montrer que je connais déjà ce raisonnement.
+
+ex7
+#include <unistd.h>
+
+void	ft_swap(int *a, int *b, int *c)
+{
+	int d
+	int e
+	int f
+
+	d = *a
+	e = *b
+	f = *c
+	*a = f
+	*b = d
+	*c = e
+}
+j'ai pas testé mais ça dois marcher.
+ex8= fusionne A et B à C, soit 45325
+
+ex9= pour une raison qui m'échappe ça fait le calcul. ok
+
+10.a=
+FONCTIONS_UTILISEES
+VARIABLES
+  a EST_DU_TYPE NOMBRE
+DEBUT_ALGORITHME
+  LIRE a
+  AFFICHERCALCUL sqrt(a)
+FIN_ALGORITHME
+
+10.b=
+FONCTIONS_UTILISEES
+VARIABLES
+  a EST_DU_TYPE NOMBRE
+DEBUT_ALGORITHME
+  LIRE a
+  AFFICHERCALCUL (a*2)*3.14159265359
+
+FIN_ALGORITHME
+
+10.c
+FONCTIONS_UTILISEES
+VARIABLES
+  a EST_DU_TYPE NOMBRE
+DEBUT_ALGORITHME
+  LIRE a
+  AFFICHERCALCUL a*0.88
+FIN_ALGORITHME
+
+calculé en fonction du prix actuel.
+
+10.d
+FONCTIONS_UTILISEES
+VARIABLES
+  a EST_DU_TYPE NOMBRE
+DEBUT_ALGORITHME
+  LIRE a
+  AFFICHERCALCUL a*(1+20/100)
+FIN_ALGORITHME
+
+sur la base d'une tva à 20%
