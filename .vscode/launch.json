@@ -9,7 +9,7 @@
             "name": "gcc.exe - Générer et déboguer le fichier actif",
             "type": "cppdbg",
             "request": "launch",
-            "program": "C:\\Users\\Adrie\\Documents\\GitHub\\Afpa\\Cursus\\Perso\\C\\Ex3Test\\ex3.exe",
+            "program": "C:\\Users\\Adrie\\Documents\\GitHub\\Afpa\\Cursus\\Perso\\C\\crack\\crack.exe",
             "args": [],
             "stopAtEntry": true,
             "cwd": "C:\\Users\\Adrie\\Documents\\GCC\\mingw64\\bin",
