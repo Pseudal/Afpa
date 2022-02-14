@@ -43,12 +43,12 @@ function mod( nombre1, nombre2)
 function main()
 {
     var nombre1 = 5; //parseInt(prompt("1er nombre"));    
-    var operateur = "%"; //prompt("opérateur ?"); 
+    var operateur = "+"; //prompt("opérateur ? ( / , * , - , + , % )"); 
     var nombre2 = 3; //parseInt(prompt("2eme nombre"));
     var res = 0;
 
     if(isNaN(nombre1) || isNaN(nombre2)) {
-        console.log("Un des opérateur est faux");
+        console.log("erreur, un des nombres est faux");
         return(0);
     }
 
@@ -63,7 +63,7 @@ function main()
     else if(operateur == '%')
         res = mod(nombre1, nombre2);
     else{
-        printf("erreur");
+        printf("erreur, l'opérateur est faux");
         return(0); }            
     console.log("le resultât de " +nombre1+ " " +operateur+ " " +nombre2+ " = " +res+ ".");        
     return 0;
