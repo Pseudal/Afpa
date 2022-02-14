@@ -4,9 +4,18 @@
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
-            "name": "gcc.exe - Générer et déboguer le fichier actif",
+            "name": "Javascript",
+            "program": "C:\\Users\\Adrie\\Documents\\GitHub\\Afpa\\Cursus\\Exercice\\02-10\\ex1.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        
+        {
+            "name": "gcc.exe",
             "type": "cppdbg",
             "request": "launch",
             "program": "C:\\Users\\Adrie\\Documents\\GitHub\\Afpa\\Cursus\\Perso\\C\\crack\\crack.exe",
