@@ -30,6 +30,7 @@ int main()
             b++;
             printf("*\n");
         }
+        
         else{
             b++;
             printf("*");
