@@ -8,7 +8,7 @@ var personnes = [
     ];
     
     while ( i  < personnes.length ) {
-        console.log(personnes[i]);
+        console.log(" nom : " +personnes[i].nom+ " prenom : " +personnes[i].prenom+ " age : " +personnes[i].age);
         i++;   
     }
 }
@@ -40,4 +40,4 @@ function ex2() {
     console.log("moyenne des nombres :" +((tab[0] + tab[1] + tab[2] + tab[3] + tab[4] + tab[5]) / 6));
 }
 
-ex2();
+ex1();
