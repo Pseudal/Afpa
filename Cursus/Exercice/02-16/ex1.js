@@ -17,8 +17,12 @@ class Compte{
         this.solde += montant 
         return this.solde;
         }
+    virement(montant, autrecompte){
+        this.retrait(montant);
+        autrecompte.versement(montant);
+        return this.solde
     }
-
+}
 var c1 = new Compte();//
 c1.numero = 001;
 c1.solde = 500;
@@ -30,12 +34,11 @@ c2.solde = 250;
 console.log(c2.affichage());
 
 var a = 150; //prompt("combien voulez vous virer ?")
-if (a > c2.solde){
-    console.log("erreur, pas assez d'argent");
-    return;
-}
-c1.retrait(a)
-c2.versement(a)
+c1.virement(a, c2)
+// if (a > c2.solde){
+//     console.log("erreur, pas assez d'argent");
+//     return;
+// }
 
 console.log(c1.affichage());
 console.log(c2.affichage());
