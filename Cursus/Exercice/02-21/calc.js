@@ -24,6 +24,7 @@ function moyenne(nbr1){
     stock = stock + nbr1;
     moy.value = stock / i+" €" ;
 }
+
 function Prix(nbr1){
     var nbr1 = parseFloat(prix.value);  
     var res = document.getElementById('res');
