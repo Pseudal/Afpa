@@ -11,6 +11,7 @@ const Body = () => {
                 laudantium quidem temporibus, quasi et.
             </p>
             <img width={256} src="./logo512.png" alt="" />
+
         </div>
     </div>
   );
