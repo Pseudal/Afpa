@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
+    console.log(props.prop_age)
     return (
         <>
             <h1>Ceci est mon en-tête</h1>
