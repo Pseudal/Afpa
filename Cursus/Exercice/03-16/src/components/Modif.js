@@ -1,30 +1,39 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 
-const Modif = (data) => {
-    const initialState = {reference:Math.floor(Math.random() * 9999999) ,name: "", price:"", available:false, image:""};
+const Modif = ({data, toto}) => {
+    const initialState = {reference:Math.floor(Math.random() * 999999999) ,name: "", price:"", available:false, image:""};
     const [person, setPerson] = useState(initialState);
-    const [Data, setData] = useState(data.data.prods)
+    const [Data, setData] = useState(data)
     const handleChange = (e) =>{
         console.log(e.target.value);
         const name = e.target.name;
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         //const {name,value} = e.target;
         //setPerson({...person,nom: e.target.value})
-        setPerson({...person,[name]:value ,reference:Math.floor(Math.random() * 9999999,)});
+        setPerson({...person,[name]:value ,reference:Math.floor(Math.random() * 999999999,)});
+        console.log(person.reference);
     }
-    data.data.lol(Data)
+
+    useEffect(() => {
+        toto(Data);
+      });
+   
+    
     function apres(){
-        
         setPerson(initialState);
+         
     }
 
     const handleSubmit = (e) =>{ 
         e.preventDefault();       
-        setData([...Data, person]); 
+        setData([person,...Data]); 
+        toast.success("Produit ajouté");       
         apres()
+        }
+    
 
-    }
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -47,6 +56,16 @@ const Modif = (data) => {
                     <button type="submit" className='btn btn-primary'>Soumettre</button>
                 </div>
             </form>
+            <ToastContainer
+            position="top-center"
+            autoClose={2500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover />
         </>
     )
 }

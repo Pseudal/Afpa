@@ -16,7 +16,7 @@ const ListProducts = ({ prods }) => {
   }; 
   return (
     <>
-      <Modif data={{ prods, lol }} />
+      <Modif data={ prods } toto={lol} />
       {ecrir.map((pr) => (
         <div key={pr.reference} className="card m-2 col-3">
           <div className="row g-0">
