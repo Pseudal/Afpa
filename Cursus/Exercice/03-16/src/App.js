@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import ListProducts from './components/list-products';
+
+import 'react-toastify/dist/ReactToastify.css';
 //import Autres from './components/autres';
  
 function App() {
