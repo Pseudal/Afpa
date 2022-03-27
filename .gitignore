@@ -2,7 +2,7 @@
 jquery-3.6.0.js
 
 # dependencies
-/node_modules
+/node_modules/*
 /.pnp
 .pnp.js
 
@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 
 Cursus/Exercice/03-17/node_modules/
+
+Cursus/material-ui/node_modules/.bin/

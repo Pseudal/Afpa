@@ -18,7 +18,9 @@ const columns = [
 const Dash = () => {
   const navigate = useNavigate();
   const [displaye, setDisplaye] = useState("none");
+  const [mod, setMod] = useState();
   const [selected, setSelected] = useState();
+
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const Dash = () => {
       .then((data) => setTableData(data));
   }, []);
 
-  console.log(selected);
+  console.log(mod);
 
   return (
     <>
@@ -55,19 +57,17 @@ const Dash = () => {
             justifyContent: "end",
           }}
         >
-          <Link state={{ Produit: selected }} to={'/ModProduct'}><Button variant="contained" sx={{ display: displaye, mr:1 }} color="warning">
-            Modifier
-          </Button></Link>
+          <Link  style={{ textDecoration: 'none' }} state={{ Produit: mod }} to={'/ModProduct'}><Button variant="contained" sx={{ display: displaye, mr:1 }} color="warning">Modifier</Button></Link>
           <Button onClick={() => {
-            ProductServices.delProduct(selected.id)
+            ProductServices.delProduct(selected[0])
             window.location.reload(); 
             }} variant="contained" sx={{ display: displaye }} color="error">
             Supprimer
           </Button>
         </Box>
       </Container>
-      <Container
-        sx={{ borderRadius: 5, textAlign: "center", bgcolor: "#ffffff" }}
+      <Box
+        sx={{ textAlign: "center", bgcolor: "#ffffff", mx:15 }}
       >
         <div style={{ height: 700, width: "100%" }}>
           <DataGrid
@@ -84,13 +84,13 @@ const Dash = () => {
             onSelectionModelChange={(props) => {
               setSelected(props)
               setDisplaye(true)
-              fetch("http://localhost:3002/products")
+              fetch(`http://localhost:3002/products/${props}`)
               .then((data) => data.json())
-              .then((data) => setTableData(data));
+              .then((data) => setMod(data));
             }}
           />
         </div>
-      </Container>
+      </Box>
     </>
   );
 };
