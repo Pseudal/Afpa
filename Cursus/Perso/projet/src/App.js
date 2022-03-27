@@ -23,7 +23,7 @@ const App = () => {
           <Route element={<Navi />}>
               <Route path="Login" element={<Login />} />
               <Route path="Register" element={<Register />} />
-              <Route path="Mention%20Légale" element={<Mention />} />
+              <Route path="Mention" element={<Mention />} />
               <Route path="New%20User" element={<PrivateRoute><RegisterA /></PrivateRoute>} />
               <Route path="AddProduct" element={<PrivateRoute><AddProduct /></PrivateRoute>} />
               <Route path="ModProduct" element={<PrivateRoute><ModProduct /></PrivateRoute>} />

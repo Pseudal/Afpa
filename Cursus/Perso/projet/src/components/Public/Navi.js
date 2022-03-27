@@ -49,7 +49,7 @@ const Navi = () => {
       AuthService.logout();
       navigate("/");
       window.location.reload();
-    } else {
+    } else if(event.currentTarget.textContent) {
       navigate(`/${event.currentTarget.textContent}`);
     }
     setAnchorElUser(null);
@@ -73,7 +73,7 @@ const Navi = () => {
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{mr:1, my: 2, color: "white", display: "block" }}
                 >
                   {page}
                 </Button>
