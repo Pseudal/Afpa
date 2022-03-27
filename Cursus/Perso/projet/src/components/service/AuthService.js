@@ -1,28 +1,41 @@
-const login = (email, password) =>{
+import axios from "axios"
 
-    if(email === "toto@gmail.com" && password ==="123"){
-        sessionStorage.setItem("token1254", Math.floor(Math.random()*10000));
+    const API_URL = "http://localhost:3002/Account"
+
+const login = (login) =>{
+    console.log(login)
+    if(login.admin)
+        sessionStorage.setItem("tokenAdmin", Math.floor(Math.random()*10000));
+    else
+        sessionStorage.setItem("tokenUser", Math.floor(Math.random()*10000));  
+}
+
+const checkToken = () => {
+    const tokenUser = sessionStorage.getItem('tokenUser')
+
+    if(tokenUser)
         return true
-    }
     else
         return false
 }
 
-const checkToken = () => {
-    const token = sessionStorage.getItem('token1254')
+const checkAdmin = () => {
+    const tokenAdmin = sessionStorage.getItem('tokenAdmin')
 
-    if(token)
+    if(tokenAdmin)
         return true
     else
         return false
 }
 
 const logout = () => {
-    sessionStorage.removeItem('token1254')
+    sessionStorage.clear()
 }
+
 
 export default{
     login,
     checkToken,
+    checkAdmin,
     logout
 }
