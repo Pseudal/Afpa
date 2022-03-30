@@ -50,13 +50,13 @@ const Produits = () => {
   return (
     <>
       <Grid className="mt-5 mb-5" container justifyContent="center">
-        <Typography variant="h3" color="white">
+        <Typography sx={{m: 5}} variant="h3" color="white">
           Nos Produits
         </Typography>
       </Grid>
       <Grid justifyContent="center" container spacing={2}>
       {products && products.map((product) => (
-        <Grid key={product.id} item={true} sx={{ mx: 3, display: "flex", justifyContent: 'center', mb:5  }} xs={3}>
+        <Grid key={product.id} item={true} sx={{ mx: 3, display: "flex", justifyContent: 'center', mb:7.5  }} xs={2.5}>
           <Card sx={{ maxWidth: 345, textAlign: "center" }}>
             <CardMedia
               component="img"
@@ -75,7 +75,7 @@ const Produits = () => {
                 Prix: {product.prix}€
               </Typography>
               <Typography sx={{ borderTop: 1, mt:1, pt:1 }} variant="body1" color="text.secondary">
-                Disponible? {product.avaible ? (
+                En stock? {product.avaible ? (
                       <CheckCircleRoundedIcon color="success" />
                     ) : (
                       <CancelRoundedIcon color="error" />

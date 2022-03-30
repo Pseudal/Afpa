@@ -1,38 +1,43 @@
 import React from "react";
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
-import { Button, Container, ButtonGroup } from "@mui/material";
+import { Button, Container, ButtonGroup, Typography, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import ProductServices from "../service/ProductServices";
 import { Box } from "@mui/system";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
-const columns = [
-  { field: "id", headerName: "ID" },
-  { field: "nom", headerName: "Produit", width: 225 },
-  { field: "prix", headerName: "Prix", width: 225 },
-  { field: "avaible", headerName: "Disponibilité", width: 225 },
-  { field: "image", headerName: "Image", width: 300 },
-];
+import DashMenu from "./DashMenu";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const Dash = () => {
   const navigate = useNavigate();
-  const [displaye, setDisplaye] = useState("none");
-  const [mod, setMod] = useState();
-  const [selected, setSelected] = useState();
-
-  const [tableData, setTableData] = useState([]);
+  const [tabledata, setTabledata] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3002/products")
+    fetch("http://localhost:3002/articles")
       .then((data) => data.json())
-      .then((data) => setTableData(data));
+      .then((data) => setTabledata(data));
   }, []);
 
-  console.log(mod);
+  function del(index) {
+    ProductServices.delArticle(index).then((data) => console.log(data));
+    window.location.reload();
+  }
 
   return (
     <>
+      <Typography textAlign="center" sx={{m: 5}} variant="h3" color="white" xs={12}>
+          Administration des articles
+      </Typography>
       <Container
         sx={{
           mt: 5,
@@ -44,53 +49,61 @@ const Dash = () => {
       >
         <Box
           sx={{
-            width: "20%",
-            display: "flex",
-          }}
-        >
-          <Link to={'/AddProduct'}><Button variant="contained">Ajouter</Button></Link>
-        </Box>
-        <Box
-          sx={{
-            width: "80%",
+            width: "100%",
             display: "flex",
             justifyContent: "end",
           }}
         >
-          <Link  style={{ textDecoration: 'none' }} state={{ Produit: mod }} to={'/ModProduct'}><Button variant="contained" sx={{ display: displaye, mr:1 }} color="warning">Modifier</Button></Link>
-          <Button onClick={() => {
-            ProductServices.delProduct(selected[0])
-            window.location.reload(); 
-            }} variant="contained" sx={{ display: displaye }} color="error">
-            Supprimer
-          </Button>
+          <Link to={"/AddArticle"}>
+            <IconButton color="primary" variant="contained"><AddIcon /></IconButton>
+          </Link>
         </Box>
       </Container>
-      <Box
-        sx={{ textAlign: "center", bgcolor: "#ffffff", mx:15 }}
-      >
-        <div style={{ height: 700, width: "100%" }}>
-          <DataGrid
-            sx={{
-              "& .MuiDataGrid-row.Mui-selected": {
-                backgroundColor: "gray",
-              },
-              "& .MuiDataGrid-row:hover": {
-                backgroundColor: "gray",
-              },
-            }}
-            rows={tableData}
-            columns={columns}
-            onSelectionModelChange={(props) => {
-              setSelected(props)
-              setDisplaye(true)
-              fetch(`http://localhost:3002/products/${props}`)
-              .then((data) => data.json())
-              .then((data) => setMod(data));
-            }}
-          />
-        </div>
+      <Box sx={{ textAlign: "center", bgcolor: "#ffffff", mx: 35, mb:5 }}>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell align="center">Avatar</TableCell>
+                <TableCell align="center">Nom</TableCell>
+                <TableCell align="center">Paruption</TableCell>
+                <TableCell align="center">Image</TableCell>
+                <TableCell align="center">Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+            {tabledata &&
+              tabledata.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  
+                  <TableCell align="left">{row.id}</TableCell>
+                  <TableCell align="center"><img src={row.avatar} width={50}></img></TableCell>
+                  <TableCell align="center">{row.nom}</TableCell>
+                  <TableCell align="center">{row.paruption}</TableCell>
+                  <TableCell align="center"><img src={row.img} width={50}></img></TableCell>
+                  <TableCell align="center">
+                    <Link state={{Produit: row, id: row.id}} to={'/modarticle'}><IconButton color="warning">
+                      <EditIcon />
+                    </IconButton></Link>
+                    <IconButton color="error" onClick={() => {
+                        if (window.confirm("êtes vous sûr ?")) {
+                          del(row.id);
+                        }
+                      }}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
+      <Box height="25px"></Box>
     </>
   );
 };

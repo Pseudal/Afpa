@@ -19,53 +19,30 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import ProductServices from "../service/ProductServices";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    // .email("email invalide"),
-    .required("l'email est obligatoire"),
-  password: Yup.string()
-    .required("Mot de passe est obligatoire")
-    .min(3, "3 caractères minimum"),
-  nom:Yup.string()
-  .required("l'email est obligatoire"),
-  //     .max(50, "50 caractères maximum")
-  //     .matches(/[a-z]+/, "One lowercase character")
-  //     .matches(/[A-Z]+/, "One uppercase character")
-  //     .matches(/[@$!%*#?&]+/, "One special character")
-  //     .matches(/\d+/, "One number"),
+  nom: Yup.string().required("Ajoutez un nom svp"),
+  prix: Yup.string().required("Ajoutez un prix svp"),
+  image: Yup.string().required("Lien de l'image"),
 });
 
-const RegisterA = () => {
+const AddProduct = () => {
   const navigate = useNavigate();
-  const notify = () =>
-    toast.error("Login/Password incorrect", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
 
   const formik = useFormik({
     initialValues: {
-      nom:"",
-      email: "",
-      password: "",
-      admin: false,
+      nom: "",
+      prix: "",
+      image: "",
+      avaible: false,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
-      navigate("/");
+        ProductServices.addProduct(values).then(data => console.log(data))
+        .catch(err=>console.error(err))
+        navigate('/Dashboard') 
+        window.location.reload(); 
     },
   });
 
@@ -79,11 +56,11 @@ const RegisterA = () => {
           textAlign: "center",
         }}
       >
-        <Card sx={{ width: "300px" }} variant="outlined">
+        <Card sx={{ width: "400px" }} variant="outlined">
           <React.Fragment>
             <CardContent>
               <Typography variant="h4" component="div" sx={{ mb: 2.5 }}>
-                New user
+                Nouveau produit
               </Typography>
               <form onSubmit={formik.handleSubmit}>
                 <TextField
@@ -91,49 +68,48 @@ const RegisterA = () => {
                   sx={{ mb: 2.5, minWidth: "100%" }}
                   name="nom"
                   id="nom"
-                  label="Votre nom"
+                  label="Nom du produit"
                   value={formik.values.nom}
                   onChange={formik.handleChange}
                   error={formik.touched.nom && Boolean(formik.errors.nom)}
                   helperText={formik.touched.nom && formik.errors.nom}
                 />
                 <TextField
-                  type="text"
+                  type="number"
                   sx={{ mb: 2.5, minWidth: "100%" }}
-                  name="email"
-                  id="email"
-                  label="email"
-                  value={formik.values.email}
+                  id="prix"
+                  label="Prix du produit"
+                  name="prix"
+                  value={formik.values.prix}
                   onChange={formik.handleChange}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
+                  error={formik.touched.prix && Boolean(formik.errors.prix)}
+                  helperText={formik.touched.prix && formik.errors.prix}
                 />
                 <TextField
-                  type="password"
+                  type="text"
                   sx={{ mb: 2.5, minWidth: "100%" }}
-                  id="Password"
-                  label="Password"
-                  name="password"
-                  value={formik.values.password}
+                  id="image"
+                  label="Image du produit"
+                  name="image"
+                  value={formik.values.image}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.email && Boolean(formik.errors.password)
-                  }
-                  helperText={formik.touched.password && formik.errors.password}
+                  error={formik.touched.image && Boolean(formik.errors.image)}
+                  helperText={formik.touched.image && formik.errors.image}
                 />
                 <Container sx={{ mb: 2.5, minWidth: "100%" }}>
-                  <FormGroup >
-                    <FormControlLabel sx={{ display: "flex", justifyContent: 'center' }}
+                  <FormGroup>
+                    <FormControlLabel
+                      sx={{ display: "flex", justifyContent: "center" }}
                       control={
                         <Checkbox
-                          checked={formik.values.admin}
-                          value={formik.values.admin}
-                          name="admin"
+                          checked={formik.values.avaible}
+                          value={formik.values.avaible}
+                          name="avaible"
                           onChange={formik.handleChange}
                           inputProps={{ "aria-label": "controlled" }}
                         />
                       }
-                      label="Admin ?"
+                      label="Disponible ?"
                     />
                   </FormGroup>
                 </Container>
@@ -151,4 +127,4 @@ const RegisterA = () => {
   );
 };
 
-export default RegisterA;
+export default AddProduct;

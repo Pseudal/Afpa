@@ -24,6 +24,8 @@ const validationSchema = Yup.object().shape({
     .matches(/[A-Z]+/, "One uppercase character")
     .matches(/[@$!%*#?&]+/, "One special character")
     .matches(/\d+/, "One number"),
+  nom:Yup.string()
+    .required("l'email est obligatoire"),
  });
 
 const Register = () => {
@@ -41,6 +43,7 @@ const Register = () => {
 
   const formik = useFormik({
     initialValues: {
+      nom:"",
       email: "",
       password: "",
       admin: false,
@@ -75,6 +78,17 @@ const Register = () => {
                 Register
               </Typography>
               <form onSubmit={formik.handleSubmit}>
+              <TextField
+                  type="text"
+                  sx={{ mb: 2.5, minWidth: "100%" }}
+                  name="nom"
+                  id="nom"
+                  label="Votre nom"
+                  value={formik.values.nom}
+                  onChange={formik.handleChange}
+                  error={formik.touched.nom && Boolean(formik.errors.nom)}
+                  helperText={formik.touched.nom && formik.errors.nom}
+                />
                 <TextField
                   type="text"
                   sx={{ mb: 2.5, minWidth:'100%' }}
